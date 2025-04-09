@@ -7,3 +7,4 @@ langchain_huggingface
 langchain
 unstructured
 markdown
+sentence-transformers

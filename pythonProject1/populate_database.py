@@ -20,7 +20,8 @@ BACKUP_PATH = "backup"
 OUTPUT_FILE = "data/output.md"
 
 
-
+import os
+print("Current working directory:", os.getcwd())
 
 
 def clean_text(text):
