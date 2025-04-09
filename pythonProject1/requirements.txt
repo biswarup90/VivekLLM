@@ -1,0 +1,7 @@
+nest_asyncio
+langchain_community
+langchain_text_splitters
+llama_parse
+llama_index
+langchain_huggingface
+langchain

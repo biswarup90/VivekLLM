@@ -9,7 +9,7 @@ from langchain_community.document_loaders import UnstructuredMarkdownLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import Chroma
 import sys
-
+from langchain_huggingface import HuggingFaceEmbeddings
 # This prevents Streamlit from trying to inspect `torch.classes`
 sys.modules["torch.classes"] = None
 nest_asyncio.apply()
@@ -20,7 +20,7 @@ BACKUP_PATH = "backup"
 OUTPUT_FILE = "data/output.md"
 
 
-from langchain_huggingface import HuggingFaceEmbeddings
+
 
 
 def clean_text(text):
