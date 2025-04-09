@@ -6,3 +6,4 @@ llama_index
 langchain_huggingface
 langchain
 unstructured
+markdown
