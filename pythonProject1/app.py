@@ -2,12 +2,13 @@ import os
 from pathlib import Path
 import streamlit as st
 
-from populate_database import clear_database, process_pdfs, BACKUP_PATH
+from populate_database import clear_database, process_pdfs, BACKUP_PATH, DATA_PATH
 from retrieval import query_rag
 
 # --- Constants ---
-DATA_PATH = "data"
+
 os.makedirs(DATA_PATH, exist_ok=True)
+os.makedirs(BACKUP_PATH, exist_ok=True)
 
 # --- Page config ---
 st.set_page_config(page_title="Vivekananda PDF RAG", layout="wide")
