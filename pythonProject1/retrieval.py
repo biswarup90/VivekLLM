@@ -47,9 +47,9 @@ Output Format:
 
 @st.cache_resource
 def get_embedding_function():
-    model_name = "sentence-transformers/all-mpnet-base-v2"
+    local_model_path = "models/embedding/all-MiniLM-L6-v2"
     return HuggingFaceEmbeddings(
-        model_name=model_name,
+        model_name=local_model_path,
         model_kwargs={"trust_remote_code": True}
     )
 @st.cache_resource
