@@ -81,7 +81,7 @@ def calculate_chunk_ids(chunks, existing_ids=None):
 
 @st.cache_resource
 def load_embedding_function():
-    local_model_path = "models/all-MiniLM-L6-v2"
+    local_model_path = "models/embedding/all-MiniLM-L6-v2"
     return HuggingFaceEmbeddings(
         model_name=local_model_path,
         model_kwargs={"trust_remote_code": True}
