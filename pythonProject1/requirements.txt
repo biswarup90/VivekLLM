@@ -5,3 +5,4 @@ llama_parse
 llama_index
 langchain_huggingface
 langchain
+unstructured
