@@ -1,6 +1,5 @@
 from utils import load_embedding_function, get_parser, OUTPUT_FILE, CHROMA_PATH, BACKUP_PATH, DATA_PATH
 
-
 __import__('pysqlite3')
 import sys
 
