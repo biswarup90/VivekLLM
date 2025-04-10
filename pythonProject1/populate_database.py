@@ -1,30 +1,24 @@
-__import__('pysqlite3')
+from utils import load_embedding_function, get_parser, OUTPUT_FILE, CHROMA_PATH, BACKUP_PATH, DATA_PATH
+
+#__import__('pysqlite3')
 import sys
-sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+
+#sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 import streamlit as st
-import os
 import shutil
-import re
 import nest_asyncio
 from llama_index.core.schema import Document
-from llama_parse import LlamaParse
+
 from langchain_community.document_loaders import UnstructuredMarkdownLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import Chroma
 import sys
-from langchain_huggingface import HuggingFaceEmbeddings
+
 # This prevents Streamlit from trying to inspect `torch.classes`
 sys.modules["torch.classes"] = None
 nest_asyncio.apply()
 
-CHROMA_PATH = "chroma"
-DATA_PATH = "data"
-BACKUP_PATH = "backup"
-OUTPUT_FILE = "data/output.md"
-
-
 import os
-print("Current working directory:", os.getcwd())
 
 
 def clean_text(text):
@@ -35,11 +29,7 @@ def clean_text(text):
 
 def parse_document(path):
     print(f"parse_document: {path}")
-    parser = LlamaParse(
-        api_key="llx-VfpCxb1VIaZSs4Mhyr0tFFgg2vc4kCt8MkntJ3wUki8xBfkK", #"llx-rN27IDyz5rvBEzwQ8FWT8AatIAsN7QiaJs7JMBXK4joDmM7g",#"llx-1nuYutoPQP68zW05zrInDDq4j6YNM2VH4DJdzQcd01ttbK3D",
-        result_type="text",
-        verbose=False,
-    )
+    parser = get_parser()
     parsed_documents = parser.load_data(path)
     cleaned_documents = [
         Document(text=clean_text(clean_text(doc.get_content())), metadata=doc.metadata)
@@ -82,14 +72,6 @@ def calculate_chunk_ids(chunks, existing_ids=None):
     return chunks
 
 
-
-@st.cache_resource
-def load_embedding_function():
-    local_model_path = "sentence-transformers/all-mpnet-base-v2"#"models/embedding/all-MiniLM-L6-v2"
-    return HuggingFaceEmbeddings(
-        model_name=local_model_path,
-        model_kwargs={"trust_remote_code": True}
-    )
 @st.cache_resource
 def add_to_chroma(_chunks):
     db = Chroma(persist_directory=CHROMA_PATH, embedding_function=load_embedding_function())
