@@ -1,7 +1,7 @@
 import re
 
 from langchain.prompts import ChatPromptTemplate
-from langchain_community.vectorstores import Chroma
+from langchain_chroma import Chroma
 
 from utils import load_embedding_function, CHROMA_PATH, PROMPT_TEMPLATE_GENERAL, PROMPT_TEMPLATE_QUOTE, get_llm
 

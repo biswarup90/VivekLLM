@@ -1,9 +1,9 @@
 from utils import load_embedding_function, get_parser, OUTPUT_FILE, CHROMA_PATH, BACKUP_PATH, DATA_PATH
 
-__import__('pysqlite3')
+#__import__('pysqlite3')
 import sys
 
-sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+#sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 import streamlit as st
 import shutil
 import nest_asyncio
@@ -11,7 +11,8 @@ from llama_index.core.schema import Document
 
 from langchain_community.document_loaders import UnstructuredMarkdownLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_community.vectorstores import Chroma
+from langchain_chroma import Chroma
+
 import sys
 
 # This prevents Streamlit from trying to inspect `torch.classes`
@@ -82,7 +83,6 @@ def add_to_chroma(_chunks):
     if new_chunks:
         new_chunk_ids = [chunk.metadata["id"] for chunk in new_chunks]
         db.add_documents(new_chunks, ids=new_chunk_ids)
-        db.persist()
         return len(new_chunks)
     return 0
 
@@ -106,7 +106,7 @@ def process_pdfs():
             documents = load_documents_llama_parser(file_path)
             chunks = split_documents(documents)
             added_count = add_to_chroma(chunks)
-
+            print("Added count: ", added_count)
             shutil.move(file_path, os.path.join(BACKUP_PATH, file_name))
             processed_files.append((file_name, added_count))
             st.success(f"✅ Moved {file_name} to {BACKUP_PATH}, Added {added_count} new chunks")

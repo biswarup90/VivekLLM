@@ -11,3 +11,4 @@ sentence-transformers
 chromadb
 pysqlite3-binary
 hf_xet
+langchain_chroma
