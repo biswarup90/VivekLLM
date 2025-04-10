@@ -1,9 +1,9 @@
 from utils import load_embedding_function, get_parser, OUTPUT_FILE, CHROMA_PATH, BACKUP_PATH, DATA_PATH
 
-#__import__('pysqlite3')
+__import__('pysqlite3')
 import sys
 
-#sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 import streamlit as st
 import shutil
 import nest_asyncio
