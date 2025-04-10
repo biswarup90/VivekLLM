@@ -9,3 +9,4 @@ unstructured
 markdown
 sentence-transformers
 chromadb
+pysqlite3-binary
