@@ -8,3 +8,4 @@ langchain
 unstructured
 markdown
 sentence-transformers
+chromadb
